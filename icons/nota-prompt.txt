@@ -1,0 +1,15 @@
+Selected variant 06: Folded N. Generated with the built-in GPT Images tool.
+Master: nota-master.png. Chrome sizes: nota16.png, nota32.png, nota48.png, nota128.png.
+Theme: Knox Ubud. Based on approved variant 06, with its dark tile removed using GPT Images.
+Active exports are downsampled from the transparent master with ImageMagick Lanczos.
+
+Background removal prompt:
+Use case: background-extraction. Edit the supplied Nota icon. Remove ONLY the entire dark moss/black rounded square background, including all dark areas between and around the N strokes, replacing it with genuine alpha transparency. Preserve the existing mango-orange and pale leaf-white folded N exactly: identical silhouette, rounded ends, folded white ribbon, colors, proportions, placement and edges. Keep the N at the same position and scale on the same square canvas. The only visible content must be the orange-and-white N. No new background, no checkerboard painted into the image, no shadow, no dark border or halo. This is a precise background removal, not a redesign. Output a transparent PNG.
+
+Original generation prompt:
+
+Use case: logo-brand
+Asset type: one review candidate for the Nota Chrome extension icon, used to annotate and edit web pages.
+Design direction: A single mango folded-paper ribbon forming an unmistakable capital N on deep moss rounded-square tile. Broad rounded strokes, one pale leaf-white facet of the folded ribbon. Flat two-dimensional geometry, no shaded folds. Friendly editorial stationery identity, completely legible small.
+Brand source: Knox's current Ubud theme, mossy jungle night with warm mango accent. Exact intended palette: deep moss #091109, mango #ffaa54, pale leaf-white #eff5ef. Use these three colors only; flat fills, no gradients. Calm, warm, personal, tactile editorial character expressed purely through confident simple shapes.
+Production constraints: one icon alone, centered square composition, icon silhouette fills 90–94% of canvas; genuinely transparent outside the icon silhouette. Must look excellent at 16x16 and 32x32. Every meaningful stroke or gap at least 8% of total width. Minimal large solid shapes, strong contrast, balanced margins. No fine outlines, texture, shadows, 3D, tiny details, watermarks, captions, labels, mockups, or grids. No text except an N only if specified in the direction. Output one square raster image.

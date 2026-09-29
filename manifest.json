@@ -1,0 +1,55 @@
+{
+	"manifest_version": 3,
+	"name": "Nota",
+	"version": "0.1.0",
+	"description": "Edit copy, leave notes, and remove elements on any page. Copy the lot as one prompt for your agent.",
+	"icons": {
+		"16": "icons/nota16.png",
+		"32": "icons/nota32.png",
+		"48": "icons/nota48.png",
+		"128": "icons/nota128.png"
+	},
+	"action": {
+		"default_title": "Nota (⌥⇧N)",
+		"default_icon": {
+			"16": "icons/nota16.png",
+			"32": "icons/nota32.png"
+		}
+	},
+	"commands": {
+		"_execute_action": {
+			"suggested_key": { "default": "Alt+Shift+N" },
+			"description": "Open or close Nota"
+		}
+	},
+	"background": { "service_worker": "background.js" },
+	"web_accessible_resources": [
+		{
+			"resources": ["fonts/*.woff2", "pages/note.html"],
+			"matches": ["<all_urls>"],
+			"use_dynamic_url": true
+		}
+	],
+	"permissions": [
+		"storage",
+		"activeTab",
+		"scripting",
+		"clipboardWrite",
+		"offscreen"
+	],
+	"content_scripts": [
+		{
+			"matches": ["<all_urls>"],
+			"js": [
+				"src/text.js",
+				"src/prompt.js",
+				"src/locate.js",
+				"src/store.js",
+				"src/ui-css.js",
+				"src/ui.js",
+				"src/nota.js"
+			],
+			"run_at": "document_idle"
+		}
+	]
+}

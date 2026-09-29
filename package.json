@@ -1,0 +1,15 @@
+{
+	"name": "nota",
+	"version": "0.1.0",
+	"private": true,
+	"description": "Chrome extension: edit copy, leave notes, and remove elements on any page, then copy one prompt for your agent.",
+	"scripts": {
+		"test": "node --test test/*.test.js test/*.test.mjs",
+		"test:unit": "node --test test/*.test.js",
+		"format": "prettier --write ."
+	},
+	"devDependencies": {
+		"playwright": "1.62.1",
+		"prettier": "^3.6.0"
+	}
+}

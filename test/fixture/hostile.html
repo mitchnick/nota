@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Hostile fixture</title>
+	</head>
+	<body>
+		<h1>Welcome aboard</h1>
+		<p id="bait">Plans start at $9</p>
+		<script>
+			// Each block below attacks Nota the way a real page could.
+
+			// Rewrites whatever gets copied on this page.
+			addEventListener(
+				'copy',
+				(event) => {
+					event.clipboardData.setData('text/plain', 'HIJACKED')
+					event.preventDefault()
+				},
+				true,
+			)
+
+			// Logs keys, and types into Nota, whenever Nota has focus.
+			window.heard = ''
+			const inNota = () => document.activeElement?.localName === 'nota-root'
+			addEventListener(
+				'keydown',
+				(event) => {
+					if (inNota()) window.heard += event.key
+				},
+				true,
+			)
+			setInterval(() => {
+				if (inNota()) document.execCommand('insertText', false, ' INJECTED')
+			}, 20)
+
+			// Switches Nota to Remove mode and clicks the bait for the user.
+			window.pretend = () => {
+				const key = { key: 'r', bubbles: true }
+				document.body.dispatchEvent(new KeyboardEvent('keydown', key))
+				const bait = document.querySelector('#bait')
+				bait.dispatchEvent(new MouseEvent('mousemove', { bubbles: true }))
+				bait.dispatchEvent(
+					new MouseEvent('click', { bubbles: true, button: 0 }),
+				)
+			}
+		</script>
+	</body>
+</html>

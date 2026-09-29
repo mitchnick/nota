@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Nota fixture</title>
+		<style>
+			body {
+				font-family: sans-serif;
+				margin: 40px;
+			}
+			.uppercase {
+				text-transform: uppercase;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- BEGIN app/views/layouts/application.html.erb -->
+		<nav><a href="/pricing" id="nav-pricing">Pricing</a></nav>
+		<main>
+			<!-- BEGIN app/views/pages/home.html.erb -->
+			<section id="hero">
+				<h1>{{HERO}}</h1>
+				<p class="lede">
+					Send <strong>email broadcasts</strong> and run
+					<a href="/automations">marketing automations</a>.
+				</p>
+				<!-- BEGIN app/views/pages/_cta.html.erb -->
+				<div class="cta">
+					<a href="/signup" class="button uppercase">Start free trial</a>
+					<a href="/demo" class="button">Book a demo</a>
+				</div>
+				<!-- END app/views/pages/_cta.html.erb -->
+			</section>
+			<section class="logos"><p>Trusted by 10,000 companies</p></section>
+			<!-- END app/views/pages/home.html.erb -->
+		</main>
+		<!-- END app/views/layouts/application.html.erb -->
+		<script>
+			window.pageClicks = 0
+			document.addEventListener('click', () => window.pageClicks++)
+		</script>
+	</body>
+</html>
