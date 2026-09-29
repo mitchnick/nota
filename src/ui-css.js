@@ -149,6 +149,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 }
 .tab:hover { color: var(--sage-100); }
 .tab[aria-pressed='true'] { background: var(--sage-700); color: var(--white); }
+.tab kbd { margin-left: 5px; font: 10px/1 var(--mono); opacity: 0.55; }
 .icon-button {
 	width: 26px;
 	height: 26px;
@@ -161,6 +162,14 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .icon-button:hover { background: var(--sage-700); color: var(--sage-100); }
 .hint { padding: 0 12px 8px; color: var(--sage-300); font-size: 12px; }
 .hint.warn { color: var(--warning-text); }
+.hint kbd {
+	padding: 0 4px;
+	border: 1px solid var(--sage-600);
+	border-radius: 4px;
+	background: var(--sage-900);
+	color: var(--sage-200);
+	font: 500 12px/16px var(--sans);
+}
 .error { padding: 0 12px 8px; color: var(--error-text); font-size: 12px; }
 .list { flex: 1; overflow-y: auto; padding: 0 8px; overscroll-behavior: contain; }
 .group + .group { margin-top: 6px; }
@@ -246,33 +255,56 @@ button { font: inherit; color: inherit; cursor: pointer; }
 	top: 0;
 	left: 0;
 	box-sizing: content-box;
-	width: 298px;
+	width: 318px;
 	height: 160px;
 	border-radius: 10px;
 	color-scheme: dark;
 }
-.popover { padding: 8px; pointer-events: auto; }
-.popover-head { color: var(--sage-300); font: 11px/1.4 var(--mono); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.popover-view { color: var(--sage-400); font: 11px/1.4 var(--mono); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.popover { padding: 10px; pointer-events: auto; }
+.popover-head { display: flex; align-items: center; gap: 6px; }
+.popover-tag {
+	flex: none;
+	padding: 0 6px;
+	border-radius: 4px;
+	background: var(--kind);
+	color: var(--sage-900);
+	font: 500 11px/18px var(--mono);
+}
+.popover-label { min-width: 0; color: var(--sage-200); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* Right to left, so a long path loses its start and keeps the file name. */
+.popover-view {
+	margin-top: 4px;
+	direction: rtl;
+	text-align: left;
+	color: var(--sage-400);
+	font: 11px/1.4 var(--mono);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
 .popover textarea {
 	display: block;
 	width: 100%;
-	min-height: 72px;
-	margin: 6px 0;
-	padding: 6px 8px;
+	min-height: 68px;
+	max-height: 260px;
+	field-sizing: content;
+	margin: 8px 0 10px;
+	padding: 7px 9px;
 	border: 1px solid var(--sage-600);
 	border-radius: 8px;
 	background: var(--sage-900);
-	color: var(--sage-200);
+	color: var(--sage-100);
 	font: inherit;
-	resize: vertical;
+	resize: none;
 	outline: none;
-	transition: all 0.15s;
+	transition: border-color 0.15s;
 }
 .popover textarea::placeholder { color: var(--sage-500); }
-.popover textarea:focus { border-color: var(--sage-400); box-shadow: var(--focus-ring); }
-.popover-foot { display: flex; align-items: center; gap: 6px; }
-.popover-foot .keys { flex: 1; color: var(--sage-400); font-size: 11px; }
+.popover textarea:focus { border-color: var(--sage-500); }
+.popover-foot { display: flex; align-items: center; justify-content: flex-end; gap: 6px; }
+.popover-foot .destructive { margin-right: auto; color: var(--error-text); }
+.popover-foot .destructive:hover { background: color-mix(in oklch, var(--error) 18%, transparent); color: var(--error-text); }
+.button kbd { margin-left: 6px; font: 12px/16px var(--sans); opacity: 0.7; }
 
 .bubble {
 	position: absolute;

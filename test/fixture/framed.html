@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Framed fixture</title>
+		<style>
+			body {
+				margin: 16px;
+				font-family: sans-serif;
+			}
+			iframe {
+				width: 600px;
+				height: 520px;
+				border: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Previews</h1>
+		<div class="previews">
+			<iframe id="home" src="/"></iframe
+			><iframe id="pricing" src="{{OTHER}}/pricing"></iframe>
+		</div>
+		<iframe
+			id="inline"
+			srcdoc="<p style='margin: 0'>Inline copy</p>"
+			style="height: 40px"
+		></iframe>
+	</body>
+</html>

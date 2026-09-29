@@ -2,7 +2,7 @@
 // well enough for an agent to find it in source.
 ;(() => {
 	const Nota = globalThis.Nota
-	const { normalize } = Nota
+	const { normalize, snippet } = Nota
 
 	const SKIP = new Set(['script', 'style', 'noscript', 'template', 'nota-root'])
 	// prettier-ignore
@@ -113,10 +113,12 @@
 	}
 
 	// Readable breadcrumb for the prompt, e.g. "section#hero > div.cta > a.btn".
+	// It also names an iframe from inside, so it goes by the element's document.
 	function wherePath(el, depth = 3) {
 		const steps = []
+		const { body } = el.ownerDocument
 		let node = el
-		while (node && node !== document.body && steps.length < depth) {
+		while (node && node !== body && steps.length < depth) {
 			steps.unshift(label(node))
 			if (stableId(node)) break
 			node = node.parentElement
@@ -151,14 +153,55 @@
 		return open.at(-1) ?? null
 	}
 
+	// The opening tag as rendered. Its classes, href, and data attributes
+	// usually sit in the template as-is, so the agent can grep for them.
+	function openTag(el) {
+		if (!el.attributes.length) return null
+		const attrs = [...el.attributes].map((a) =>
+			a.value ? `${a.name}="${a.value.replaceAll('"', '&quot;')}"` : a.name,
+		)
+		return `<${snippet([el.localName, ...attrs].join(' '), 200)}>`
+	}
+
+	// Which of the elements with this tag and text it is, when the text repeats.
+	function occurrence(el, text) {
+		if (!text) return null
+		const same = [
+			...el.ownerDocument.getElementsByTagName(el.localName),
+		].filter((other) => textOf(other) === text)
+		return same.length > 1
+			? { index: same.indexOf(el) + 1, count: same.length }
+			: null
+	}
+
+	// The closest heading before an element with no text of its own.
+	function nearHeading(el) {
+		let near = null
+		for (const heading of el.ownerDocument.querySelectorAll(
+			'h1, h2, h3, h4, h5, h6',
+		)) {
+			if (
+				el.compareDocumentPosition(heading) & Node.DOCUMENT_POSITION_FOLLOWING
+			)
+				break
+			const text = readText(heading)
+			if (text) near = { tag: heading.localName, text }
+		}
+		return near
+	}
+
 	function describe(el) {
+		const text = textOf(el)
 		return {
 			tag: el.localName,
-			text: textOf(el),
+			text,
 			selector: cssSelector(el),
 			where: wherePath(el),
 			template: findTemplate(el),
 			lang: el.closest('[lang]')?.getAttribute('lang') || null,
+			html: openTag(el),
+			occurrence: occurrence(el, text),
+			near: text ? null : nearHeading(el),
 		}
 	}
 
@@ -183,5 +226,5 @@
 		return item.kind === 'edit' ? null : bySelector
 	}
 
-	Object.assign(Nota, { readText, describe, resolve })
+	Object.assign(Nota, { readText, describe, resolve, wherePath })
 })()

@@ -49,7 +49,9 @@
 				"src/ui.js",
 				"src/nota.js"
 			],
-			"run_at": "document_idle"
+			"run_at": "document_idle",
+			"all_frames": true,
+			"match_origin_as_fallback": true
 		}
 	]
 }
